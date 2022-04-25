@@ -1,16 +1,16 @@
- /******************************************************************************
+/******************************************************************************
  *
- * Module: Port
+ * Module: Dio
  *
- * File Name: Port.h
+ * File Name: Dio.h
  *
- * Description: Header file for STM32 Microcontroller - Port Driver.
+ * Description: Header file for STM32 Microcontroller - Dio Driver
  *
  * Author: 
  ******************************************************************************/
 
-#ifndef PORT_H
-#define PORT_H
+#ifndef DIO_H
+#define DIO_H
 
 /*******************************************************************************
  *                                  Includes                                   *
@@ -37,38 +37,34 @@
  *                              Function Prototypes                            *
  *******************************************************************************/
 
+
+/************************************************************************************
+* Service Name: Dio_ReadChannel
+* Sync/Async: Synchronous
+* Reentrancy: Non reentrant
+* Parameters (in): ChannelId -  ID of the channel(pin) required to read from
+* Parameters (inout): None
+* Parameters (out): None
+* Return value: Dio_LevelType (HIGH or LOW)
+* Description: Read Digital value on the required input channel and return it
+************************************************************************************/
+Dio_LevelType Dio_ReadChannel(ChannelId);
+
 /************************************************************************************
 * Service Name: Port_Init
 * Sync/Async: Synchronous
 * Reentrancy: Non reentrant
-* Parameters (in): PortConfigiration -  configuration data
+* Parameters (in): ChannelId -  ID of the channel(pin) required to write on
+*                  Level -  Value to be written(HIGH or LOW)
 * Parameters (inout): None
 * Parameters (out): None
 * Return value: None
-* Description: Initialize ALL ports and port pins with the configuration set pointed 
-*              to by the parameter ConfigPtr
+* Description: Write provided voltage level to the mentioned channel
 ************************************************************************************/
-void Port_Init(PortConfigiration);
-
-
-/************************************************************************************
-* Service Name: Port_SetPinMode
-* Sync/Async: Synchronous
-* Reentrancy: Reentrant
-* Parameters (in): Pin - Port pin Id number
-*                  Mode  - New Port Pin mode to be set on port pin. 
-* Parameters (inout): None
-* Parameters (out): None
-* Return value: None
-* Description: Sets the port pin mode.  
-************************************************************************************/
-void Port_SetPinMode(Pin,Mode); 
-
-
+void Dio_WriteChannel(ChannelId,Level);
 
 /*******************************************************************************
  *                       External Variables                                    *
  *******************************************************************************/
-//Here add any extern that will be used
 
-#endif /* PORT_H */
+#endif /* DIO_H */
