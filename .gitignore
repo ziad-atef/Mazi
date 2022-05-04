@@ -50,16 +50,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-*.dbgconf
-*.scvd
-*.axf
-*.htm
-*.asm
-*.lnp
-*.dep
-*.ziada
-*.uvoptx
-*.uvprojx
-*.2
-Drivers/PWM/code/RTE/Device/STM32F103C8/.system_stm32f10x.c@1.0.1
-Drivers/PWM/code/RTE/Device/STM32F103C8/.startup_stm32f10x_md.s@1.0.1
