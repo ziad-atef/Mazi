@@ -25,7 +25,13 @@
  *                                  Definitions                                *
  *******************************************************************************/
 //Here you should add any #define that you may require in your work
-
+#define adc1	 1
+#define adc2	 2
+#define PA       1
+#define PB       2
+#define PC       3
+#define I_AN 	 0 //input analog
+#define  IN      0 //input
 
 /*******************************************************************************
  *                              Module Data Types                              *
@@ -47,7 +53,8 @@
 * Return value: None
 * Description: Initialize the ADC module.
 ********************************************************************************/
-void ADC_init(ADC_Confiration);
+// void ADC_init(ADC_Confiration);
+char ADC_init(char adc, short port, short pin);
 
 /*******************************************************************************
 * Service Name: ADC_startConversion
@@ -60,7 +67,8 @@ void ADC_init(ADC_Confiration);
 * Return value: None
 * Description: Start the conversion of the ADC.
 ********************************************************************************/
-void ADC_startConversion(module, channel);
+// void ADC_startConversion(module, channel);
+char ADC_startConversion(char adc, short port, short pin);
 
 /*******************************************************************************
 * Service Name: ADC_conversionDone
@@ -73,7 +81,8 @@ void ADC_startConversion(module, channel);
 * Return value: boolean
 * Description: Check whether a channel has finished a sample conversion.
 ********************************************************************************/
-boolean ADC_conversionDone(module, channel);
+// boolean ADC_conversionDone(module, channel);
+char ADC_conversionDone(char adc, short port, short pin);
 
 /*******************************************************************************
 * Service Name: ADC_getData
@@ -86,8 +95,8 @@ boolean ADC_conversionDone(module, channel);
 * Return value: conversionResult - Result from ADC conversion
 * Description: Obtain the converted data from the register.
 ********************************************************************************/
-conversionResult ADC_getData(module, channel);
-
+// conversionResult ADC_getData(module, channel);
+int ADC_getData(char adc, short port, short pin);
 
 /*******************************************************************************
  *                       External Variables                                    *
