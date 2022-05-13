@@ -19,6 +19,7 @@
 //Here you should include any file you may need
 #include "Std_Types.h"
 #include "Common_Macros.h"
+#include "GPIO\DELAY.h"
 
 
 /*******************************************************************************
@@ -27,9 +28,9 @@
 //Here you should add any #define that you may require in your work
 #define adc1	 1
 #define adc2	 2
-#define PA       1
-#define PB       2
-#define PC       3
+// #define PA       1
+// #define PB       2
+// #define PC       3
 #define I_AN 	 0 //input analog
 #define  IN      0 //input
 
@@ -54,7 +55,7 @@
 * Description: Initialize the ADC module.
 ********************************************************************************/
 // void ADC_init(ADC_Confiration);
-char ADC_init(char adc, short port, short pin);
+char ADC_init(char adc, GPIO_TypeDef* port, short pin);
 
 /*******************************************************************************
 * Service Name: ADC_startConversion
@@ -68,7 +69,7 @@ char ADC_init(char adc, short port, short pin);
 * Description: Start the conversion of the ADC.
 ********************************************************************************/
 // void ADC_startConversion(module, channel);
-char ADC_startConversion(char adc, short port, short pin);
+char ADC_startConversion(char adc, short pin);
 
 /*******************************************************************************
 * Service Name: ADC_conversionDone
@@ -82,7 +83,7 @@ char ADC_startConversion(char adc, short port, short pin);
 * Description: Check whether a channel has finished a sample conversion.
 ********************************************************************************/
 // boolean ADC_conversionDone(module, channel);
-char ADC_conversionDone(char adc, short port, short pin);
+char ADC_conversionDone(char adc, short pin);
 
 /*******************************************************************************
 * Service Name: ADC_getData
@@ -96,7 +97,7 @@ char ADC_conversionDone(char adc, short port, short pin);
 * Description: Obtain the converted data from the register.
 ********************************************************************************/
 // conversionResult ADC_getData(module, channel);
-int ADC_getData(char adc, short port, short pin);
+int ADC_getData(char adc, short pin);
 
 /*******************************************************************************
  *                       External Variables                                    *
