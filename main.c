@@ -1,19 +1,23 @@
-#include "ADC.h"
-#include "gpio.h"
+#include "Drivers\ADC\ADC.h"
+#include "Drivers\GPIO\_HAL_GPIO.h"
+
 
 int main(void) //test ADC
 {
     //systick_init();
-    ADC_init(adc1, PA, 0);
+    ADC_init(adc1, PORTA, 0);
+    int analog=0;
 
     while (1)
     {
-        if( ADC_startConversion(adc1, PA, 0) )
+        if( ADC_startConversion(adc1, 0) )
         {
-            if( ADC_conversionDone(adc1, PA, 0) ) 
+            if( ADC_conversionDone(adc1, 0) ) //instead of check
                 {
-                    ADC_getData(adc1, PA, 0);
+                    analog = ADC_getData(adc1, 0);
                 }
         }
+
+        /
     }
 }
