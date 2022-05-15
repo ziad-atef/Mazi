@@ -1,4 +1,3 @@
-
 #include "ADC.h"
 #define adc1 1
 #define adc2 2
@@ -13,73 +12,123 @@
  * Return value: short channel    -   channel number - it's -1 on configuration failure
  * Description: Initialize the ADC module.
  ********************************************************************************/
-short ADC_init(char adc, short port, short pin)
+char ADC_init(char adc, GPIO_TypeDef *port, short pin)
+// void ADC_init(ADC_Confiration)
 {
-    /*
-    port->  pin
-    PA0 ->  ADC12_IN0
-    PA1 ->  ADC12_IN1
-    PA2 ->  ADC12_IN2
-    PA3 ->  ADC12_IN3
-    PA4 ->  ADC12_IN4
-    PA5 ->  ADC12_IN5
-    PA6 ->  ADC12_IN6
-    PA7 ->  ADC12_IN7
+    char channel = 0; // we've 16 channels
+    char result = 0;  // value read from adc
+    GPIO_TYPE gp;
+    gp.mode = INPUT_MODE;
+    gp.mode_type = INPUT_ANALOG;
 
-    PB0 ->  ADC12_IN8
-    PB1 ->  ADC12_IN9
+    // get channel according to pin and port used
+    // get it from data sheet
 
-    PC0 ->  ADC12_IN10
-    PC1 ->  ADC12_IN11
-    PC2 ->  ADC12_IN12
-    PC3 ->  ADC12_IN13
-    PC4 ->  ADC12_IN14
-    PC5 ->  ADC12_IN15
-    */
-    char channel;
-    switch (port)
+    if (port == GPIOA)
     {
-    case PA:
         if (pin < 8)
+        {
+            result = 1; // we reached a channel successfully
             channel = pin;
-        else
-            return -1;
-        break;
-    case PB:
+            gp.port = GPIOA;
+            gp.pin = pin;
+        }
+    }
+    else if (port == GPIOB)
+    {
         if (pin < 2)
-            channel = 8 + pin;
-        else
-            return -1;
-        break;
-    case PC:
+        {
+            result = 1; // we reached a channel successfully
+            channel = pin + 8;
+            gp.port = GPIOB;
+            gp.pin = pin;
+        }
+    }
+    else if (port == GPIOC)
+    {
         if (pin < 6)
-            channel = 10 + pin;
-        else
-            return -1;
-        break;
-    default:
-        return -1;
+        {
+            result = 1; // we reached a channel successfully
+            channel = pin + 10;
+            gp.port = GPIOC;
+            gp.pin = pin;
+        }
     }
-    // init_GP(port, pin, IN, IN_ANALOG);
-    if (adc == adc1)
+    if (result)
     {
-        // peropheral clock enable register
-        // set bit 9 and bit 0 to 1
-        RCC->APB2ENR |= 0x201;
-        // clean configurations for adc1
-        ADC1->CR2 = 0;
+        //		HAL_GPIO_Init(port, pin, IN, I_AN);
+        //		HAL_GPIO_Init(GPIOx, GPIO_Init);
+        //		MX_GPIO_Init();
+
+        gpio_init(gp);
+
+        if (adc == adc1)
+        {
+            // peripheral clock enable register
+            // set bit 9 and bit 0 in RCC to 1
+            RCC->APB2ENR |= 0x201;
+            // clean configurations for adc1 to make sure there is
+            // no extra setup make control register=0
+            ADC1->CR2 = 0;
+            // put #of channel in regular sequence register
+            // SQ1
+            ADC1->SQR3 = channel;
+            // power on the adc from control register
+            // ADON A/D converter on/off, we must set it 1 twice
+            ADC1->CR2 |= 1;
+            //			HAL_Delay(100);
+            delay(100);
+            ADC1->CR2 |= 1;
+
+            // make continuous conversion,
+            // whenever we need conversion, begin conversion again and again
+            ADC1->CR2 |= 2;
+        }
+        else if (adc == adc2)
+        {
+            // peripheral clock enable register
+            // set bit 10 and bit 0 in RCC to 1
+            RCC->APB2ENR |= 0x401;
+            // clean configurations for adc2 to make sure there is
+            // no extra setup make control register=0
+            ADC2->CR2 = 0;
+            // put #of channel in regular sequence register
+            // SQ1
+            ADC2->SQR3 = channel;
+
+            // make continuous conversion,
+            // whenever we need conversion, begin conversion again and again
+            // I think this will be used if we don't make continuous conversion
+
+            // ADC2->CR2 |= 2;
+        }
     }
-    else if (adc == adc2)
-    {
-        // peropheral clock enable register
-        // set bit 10 and bit 0 to 1
-        RCC->APB2ENR |= 0x401;
-        // clean configurations for adc1
-        ADC2->CR2 = 0;
-    }
-    return channel;
+    return result;
 }
 
+// check if the data is ready
+// char adc_check(char adc, short port, short pin)
+//{
+//	char check = 0;
+//	if(adc == adc1)
+//		{
+//			//status register
+//			if(ADC1->SR & 2)
+//			{
+//				check  = 1;
+//			}
+//		}
+//		else if(adc == adc2)
+//		{
+//			if(ADC2->SR & 2)
+//			{
+//				check  = 1;
+//			}
+//		}
+//
+//
+//	return check;
+//}
 /*******************************************************************************
  * Service Name: ADC_startConversion
  * Sync/Async: Synchronous
@@ -91,22 +140,29 @@ short ADC_init(char adc, short port, short pin)
  * Return value: None
  * Description: Start the conversion of the ADC.
  ********************************************************************************/
-void ADC_startConversion(module, channel)
+
+char ADC_startConversion(char adc, short pin)
 {
-    if (module == adc1)
+    // this code was put in init
+    // power on the adc from control register
+    // ADON A/D converter on/off, we must set it 1 twice
+    // this is my code :')
+    // check the start bit in the status register
+    char checkIfStarted = 0;
+    if (adc == adc1)
     {
-        // select the channel to scan
-        ADC1->SQR3 = channel;
         // set ADON bit to 1 to wake up the ADC from power down state
-        ADC1->CR2 |= 1;
+        ADC2->CR2 |= 1;
         // wait for t_STAB
-        DelayMs(100);
+        HAL_Delay(100);
         // set ADON bit to 1 again to start conversion
-        ADC1->CR2 |= 1;
-        // set CONT bit to 1 to setup for contiuous conversion
-        // ADC1->CR2 |= 2;
+        ADC2->CR2 |= 1;
+        // status register
+        if (ADC1->SR & 16)
+            checkIfStarted = 1;
+
     }
-    else if (module == 2)
+    else if (adc == adc2)
     {
         // select the channel to scan
         ADC2->SQR3 = channel;
@@ -117,8 +173,14 @@ void ADC_startConversion(module, channel)
         // set ADON bit to 1 again to start conversion
         ADC2->CR2 |= 1;
         // set CONT bit to 1 to setup for contiuous conversion
+
         // ADC2->CR2 |= 2;
+        // status register
+        if (ADC2->SR & 16)
+            checkIfStarted = 1;
     }
+
+    return checkIfStarted;
 }
 
 /*******************************************************************************
@@ -131,16 +193,30 @@ void ADC_startConversion(module, channel)
  * Parameters (out): None
  * Return value: boolean
  * Description: Check whether a channel has finished a sample conversion.
+ *                  check EOC in ADCx->SR & 2 for end of conversion
+ *                  EOC -> 0 : conversion not complete
+ *                  EOC -> 1: conversion complete
  ********************************************************************************/
-boolean ADC_conversionDone(module, channel)
+char ADC_conversionDone(char adc, short pin)
 {
-    // check bit 1 EOC,
-    // 0 -> Conversion is not done, 1-> Conversion complete
+    char checkIfDone = 0;
+    if (adc == adc1)
+    {
+        // status register
+        if (ADC1->SR & 2)
+        {
+            checkIfDone = 1;
+        }
+    }
+    else if (adc == adc2)
+    {
+        if (ADC2->SR & 2)
+        {
+            checkIfDone = 1;
+        }
+    }
 
-    if (module == 1)
-        return (ADC1->SR & 2) != 0;
-    else if (module == 2)
-        return (ADC2->SR & 2) != 0;
+    return checkIfDone;
 }
 
 /*******************************************************************************
@@ -154,10 +230,22 @@ boolean ADC_conversionDone(module, channel)
  * Return value: int - Result from ADC conversion
  * Description: Obtain the converted data from the register.
  ********************************************************************************/
-int ADC_getData(module, channel)
+int ADC_getData(char adc, short pin)
 {
-    if (module == adc1)
-        return (ADC1->DR) * 1000 / 0xfff;
-    else if (module == adc2)
-        return (ADC2->DR) * 1000 / 0xfff;
+    int result = 0;
+    int data = 0;
+    if (adc == adc1)
+    {
+        // data register
+        // 12 bit to be read
+        data = ADC1->DR;
+    }
+    else if (adc == adc2)
+    {
+        data = ADC2->DR;
+    }
+
+    result = (data * 1000) / 0xfff;
+
+    return result;
 }

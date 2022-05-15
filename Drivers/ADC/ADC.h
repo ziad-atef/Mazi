@@ -19,12 +19,21 @@
 // Here you should include any file you may need
 #include "Std_Types.h"
 #include "Common_Macros.h"
-// #include "gpio_drive.h"
+
+#include "GPIO\DELAY.h"
 
 /*******************************************************************************
  *                                  Definitions                                *
  *******************************************************************************/
+
 // Here you should add any #define that you may require in your work
+#define adc1 1
+#define adc2 2
+// #define PA       1
+// #define PB       2
+// #define PC       3
+#define I_AN 0 // input analog
+#define IN 0   // input
 
 /*******************************************************************************
  *                              Module Data Types                              *
@@ -42,10 +51,10 @@
  * Parameters (in): ADC_Confiration -  configuration data
  * Parameters (inout): None
  * Parameters (out): None
- * Return value: short  -   channel number - it's -1 on configuration failure
+ * Return value: None
  * Description: Initialize the ADC module.
  ********************************************************************************/
-short ADC_init(char adc, short port, short pin);
+char ADC_init(char adc, GPIO_TypeDef *port, short pin);
 
 /*******************************************************************************
  * Service Name: ADC_startConversion
@@ -58,7 +67,8 @@ short ADC_init(char adc, short port, short pin);
  * Return value: None
  * Description: Start the conversion of the ADC.
  ********************************************************************************/
-void ADC_startConversion(module, channel);
+// void ADC_startConversion(module, channel);
+char ADC_startConversion(char adc, short pin);
 
 /*******************************************************************************
  * Service Name: ADC_conversionDone
@@ -71,7 +81,8 @@ void ADC_startConversion(module, channel);
  * Return value: boolean
  * Description: Check whether a channel has finished a sample conversion.
  ********************************************************************************/
-boolean ADC_conversionDone(module, channel);
+// boolean ADC_conversionDone(module, channel);
+char ADC_conversionDone(char adc, short pin);
 
 /*******************************************************************************
  * Service Name: ADC_getData
@@ -81,10 +92,11 @@ boolean ADC_conversionDone(module, channel);
  *                  sequencer    - Sample sequencer number in that module
  * Parameters (inout): None
  * Parameters (out): None
- * Return value: int - Result from ADC conversion
+ * Return value: conversionResult - Result from ADC conversion
  * Description: Obtain the converted data from the register.
  ********************************************************************************/
-int ADC_getData(module, channel);
+// conversionResult ADC_getData(module, channel);
+int ADC_getData(char adc, short pin);
 
 /*******************************************************************************
  *                       External Variables                                    *

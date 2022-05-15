@@ -1,9 +1,4 @@
 {
-    "files.associations": {
-        "adc.h": "c",
-        "_hal_gpio.h": "c",
-        "delay.h": "c"
-    },
     "editor.quickSuggestions": {
         "other": "on",
         "comments": true,
