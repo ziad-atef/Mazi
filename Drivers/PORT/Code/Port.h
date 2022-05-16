@@ -16,10 +16,19 @@
  *                                  Includes                                   *
  *******************************************************************************/
 
-//Here you should include any file you may need
-#include "Std_Types.h"
-#include "Common_Macros.h"
-
+#include "stm32f10x.h"                         /* 
+																									Device header which includes 
+																									all the definitions of the 
+																									device registers
+																							 */
+#include "../../../Includes/Std_Types.h"			 /* 
+																									Includes the generic types to 
+																									be used
+																							 */
+#include "../../../Includes/Common_Macros.h"	 /* 
+																									Includes important macros to 
+																									be used
+																							 */
 
 /*******************************************************************************
  *                                  Definitions                                *
@@ -62,7 +71,7 @@ void Port_Init(PortConfigiration);
 * Return value: None
 * Description: Sets the port pin mode.  
 ************************************************************************************/
-void Port_SetPinMode(Pin,Mode); 
+void Port_SetPinMode(uint8 Pin,uint8 Mode); 
 
 
 
