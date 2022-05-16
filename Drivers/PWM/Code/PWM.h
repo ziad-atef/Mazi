@@ -8,6 +8,12 @@
  * Description: Header file for STM32 Microcontroller - PWM Driver.
  *
  * Author: Ziad Atef
+ *
+ *Beware when initializing pins that multiple pins initialize the 
+ *same timer module:-
+ *	-Timer1: PA8, PA9, PA10, PA11 
+ *	-Timer2:	PA0, PA1, PA2, PA3
+ *	-Timer3:	PA6, PA7, PB0, PB1
  ******************************************************************************/
 
 #ifndef _PWM_H_
@@ -50,6 +56,7 @@
 
 #define PB0		16
 #define PB1		17
+
 #define TIM_CCMR1_PWM_MODE1_CH1 ((uint16_t)0x0060)
 #define TIM_CCMR1_PWM_MODE1_CH2 ((uint16_t)0x6000)
 #define TIM_CCMR2_PWM_MODE1_CH3 ((uint16_t)0x0060)
