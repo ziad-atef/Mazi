@@ -1,7 +1,4 @@
 {
-    "files.associations": {
-        "adc.h": "c"
-    },
     "editor.quickSuggestions": {
         "other": "on",
         "comments": true,

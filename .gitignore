@@ -57,3 +57,5 @@ DebugConfig/
 *.ziada
 *.uvoptx
 *.uvprojx
+
+.vscode

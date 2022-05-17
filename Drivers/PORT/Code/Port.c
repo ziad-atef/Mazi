@@ -1,3 +1,4 @@
+
 #include "Port.h"
 
 /************************************************************************************
@@ -28,7 +29,7 @@ void Port_Init(PortConfigiration)
 * Return value: None
 * Description: Sets the port pin mode.  
 ************************************************************************************/
-void Port_SetPinMode(Pin,Mode)
+void Port_SetPinMode(uint8 Pin,uint8 Mode)
 {
-
+	
 }
