@@ -1,5 +1,5 @@
 
-#include"PWM.h"
+#include "PWM.h"
 
 /*******************************************************************************
 * Service Name: PWM_Init
@@ -63,7 +63,7 @@ void PWM_Init(uint8 PinNum, uint16 Prescalar, uint16 ReloadVal)
 	}
 	else if( PinNum == PA0 || PinNum == PA1 || PinNum == PA2 || PinNum == PA3 )
 	{
-		RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;			/* Enabling CLK for Timer1 Module*/
+		RCC->APB2ENR |= RCC_APB1ENR_TIM2EN;			/* Enabling CLK for Timer1 Module*/
 		
 		TIM2->PSC = Prescalar-1;									/* 
 																							 Setting prescalar value for timer 1
@@ -98,11 +98,12 @@ void PWM_Init(uint8 PinNum, uint16 Prescalar, uint16 ReloadVal)
 			break;
 		}
 	
+		TIM2->BDTR |= 0x8000;											/*Not needed*/
 		TIM2->CR1 |= 1;
 	}
 	else if( PinNum == PA6 || PinNum == PA7 || PinNum == PB0 || PinNum == PB1 )
 	{
-		RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;			/* Enabling CLK for Timer1 Module*/
+		RCC->APB2ENR |= RCC_APB1ENR_TIM3EN;			/* Enabling CLK for Timer1 Module*/
 		
 		TIM3->PSC = Prescalar-1;									/* 
 																							 Setting prescalar value for timer 1
@@ -136,7 +137,8 @@ void PWM_Init(uint8 PinNum, uint16 Prescalar, uint16 ReloadVal)
 			default:
 			break;
 		}
-		
+	
+		TIM3->BDTR |= 0x8000;                  /*Not needed*/
 		TIM3->CR1 |= 1;
 	}
 	
@@ -160,27 +162,27 @@ void PWM_Start(uint8 PinNum, uint16 Duty)
 	{
 		case PA0:
 			TIM2->CCR1 = Duty;
-			TIM2->CCER |= 0x1;
+			TIM2->CCER |= (1<<0);
 		break;
 		case PA1:
 			TIM2->CCR2 = Duty;
-			TIM2->CCER |= 0x10;
+			TIM2->CCER |= (1<<1);
 		break;
 		case PA2:
 			TIM2->CCR3 = Duty;
-			TIM2->CCER |= 0x100;
+			TIM2->CCER |= (1<<2);
 		break;
 		case PA3:			
 			TIM2->CCR4 = Duty;
-			TIM2->CCER |= 0x1000;
+			TIM2->CCER |= (1<<3);
 		break;
 		case PA6:
 			TIM3->CCR1 = Duty;
-			TIM3->CCER |= 0x1;
+			TIM3->CCER |= (1<<0);
 		break;
 		case PA7:			
 			TIM3->CCR2 = Duty;
-			TIM3->CCER |= 0x10;
+			TIM3->CCER |= (1<<1);
 		break;
 		case PA8:
 			TIM1->CCR1 = Duty;
@@ -192,19 +194,19 @@ void PWM_Start(uint8 PinNum, uint16 Duty)
 		break;
 		case PA10:
 			TIM1->CCR3 = Duty;
-			TIM1->CCER |= 0x100;
+			TIM1->CCER |= (1<<2);
 		break;
 		case PA11:			
 			TIM1->CCR4 = Duty;
-			TIM1->CCER |= 0x1000;
+			TIM1->CCER |= (1<<3);
 		break;
 		case PB0:
 			TIM3->CCR3 = Duty;
-			TIM3->CCER |= 0x100;
+			TIM3->CCER |= (1<<2);
 		break;
 		case PB1:			
 			TIM3->CCR4 = Duty;
-			TIM3->CCER |= 0x1000;
+			TIM3->CCER |= (1<<3);
 		break;
 		default:
 		break;

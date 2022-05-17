@@ -1,4 +1,4 @@
-#include "_HAL_GPIO.h"
+#include "Drivers/GPIO/_HAL_GPIO.h"
 #include <stdint.h>
 
 uint32_t PINPOS [16]={
@@ -29,59 +29,87 @@ uint32_t PINPOS [16]={
 static void config_pin(GPIO_TypeDef *port,uint32_t pinNumber,uint32_t  Mode_type)
 {
 	
-	 
+		uint32_t right_bit_setter;
+		uint32_t left_bit_setter;
+	
 	if(pinNumber>=8) //CONTROL HIGH REGISTER
 	{
 		switch( Mode_type)
 		{ // OUTPUT & INPUT MODES
-			case OUTPUT_GEN_PURPOSE |INPUT_ANALOG:
-				port->CRH &=~((1<<CNF_POS_BIT1) | (1<<CNF_POS_BIT2));
-			break;
+			case OUTPUT_GEN_PURPOSE:
+				left_bit_setter = ~(1<<CNF_POS_BIT2);
+				right_bit_setter = ~(1<<CNF_POS_BIT1);
 			
-			case OUTPUT_OD | INPUT_FLOATING:
-				port->CRH &= ~(1<<CNF_POS_BIT2);
-			  port->CRH |= (1<<CNF_POS_BIT1);
-			break;
+				port->CRH &= left_bit_setter;
+				port->CRH &= right_bit_setter;
+				break;
+			//case INPUT_ANALOG:
+			//	port->CRH &=~((1<<CNF_POS_BIT1) | (1<<CNF_POS_BIT2));
+			//	break;
 			
-			case OUTPUT_ALT_FUNCTION |INPUT_PU_PD:
-				port->CRH |=OUTPUT_ALT_FUNCTION<<(CNF_POS_BIT1);
-			break;
+			case OUTPUT_OD:
+				left_bit_setter = ~(1<<CNF_POS_BIT2);
+				right_bit_setter = (1<<CNF_POS_BIT1);
+			
+				port->CRH &= left_bit_setter;
+			  port->CRH |= right_bit_setter;
+				break;
+			//case INPUT_FLOATING:
+			//	port->CRH &= ~(1<<CNF_POS_BIT2);
+			//  port->CRH |= (1<<CNF_POS_BIT1);
+			//	break;
+			
+			case OUTPUT_ALT_FUNCTION:
+				left_bit_setter = 1 << CNF_POS_BIT2;
+				right_bit_setter = ~(1<<CNF_POS_BIT1);
+				
+				port->CRH |= left_bit_setter;
+				port->CRH &= right_bit_setter;
+				break;
+			//case INPUT_PU_PD:
+			//	port->CRH |=OUTPUT_ALT_FUNCTION<<(CNF_POS_BIT1);
+			//	break;
 			case OUTPUT_ALT_FUNCTION_OD:
 				port->CRH |=OUTPUT_ALT_FUNCTION_OD<<(CNF_POS_BIT1);
 			break;
 			
 			
 		}//end switch
-		
-		
 	}
 	else //CONTROL LOW REGISTER
-		
-	
 	{
 			switch( Mode_type)
 		{ // OUTPUT & INPUT MODES
-			case OUTPUT_GEN_PURPOSE |INPUT_ANALOG:
-				port->CRL &=~((1<<CNF_POS_BIT1) | (1<<CNF_POS_BIT2));
-			break;
+//			case OUTPUT_GEN_PURPOSE |INPUT_ANALOG:
+				case OUTPUT_GEN_PURPOSE:
+					left_bit_setter = ~(1<<CNF_POS_BIT1);
+					right_bit_setter = ~(1<<CNF_POS_BIT2);
+					port->CRL &= left_bit_setter;
+					port->CRL &= right_bit_setter;
+				//port->CRL &=~((1<<CNF_POS_BIT1) | (1<<CNF_POS_BIT2));
+					break;
 			
-			case OUTPUT_OD | INPUT_FLOATING:
-				port->CRL &= ~(1<<CNF_POS_BIT2);
-			  port->CRL |= (1<<CNF_POS_BIT1);
-			break;
+//			case OUTPUT_OD | INPUT_FLOATING:
+				case OUTPUT_OD:
+					left_bit_setter = ~(1<<CNF_POS_BIT2);
+					right_bit_setter = (1<<CNF_POS_BIT1);
+					port->CRL &= left_bit_setter;
+					port->CRL |= right_bit_setter;
+					break;
 			
-			case OUTPUT_ALT_FUNCTION |INPUT_PU_PD:
-				port->CRL |=OUTPUT_ALT_FUNCTION<<(CNF_POS_BIT1);
-			break;
-			case OUTPUT_ALT_FUNCTION_OD:
-				port->CRL |=OUTPUT_ALT_FUNCTION_OD<<(CNF_POS_BIT1);
-			break;
-			
-			
+//			case OUTPUT_ALT_FUNCTION |INPUT_PU_PD:
+				case OUTPUT_ALT_FUNCTION:
+					left_bit_setter = 1<<CNF_POS_BIT2;
+					right_bit_setter = ~(1<<CNF_POS_BIT1);
+					port->CRL |= left_bit_setter;
+					port->CRL &= right_bit_setter;
+//					port->CRL |=OUTPUT_ALT_FUNCTION<<(CNF_POS_BIT1);
+					break;
+				
+				case OUTPUT_ALT_FUNCTION_OD:
+					port->CRL |=OUTPUT_ALT_FUNCTION_OD<<(CNF_POS_BIT1);
+					break;
 		}//end switch
-		
-		
-		
 	}
 }
 
@@ -116,14 +144,15 @@ void gpio_write(GPIO_TypeDef *port,uint32_t pinNumber,uint8_t state)
 	if(state)
 	{
 		
-		port->BSRR=(1<<(pinNumber + 16));
+		port->BSRR=(1<<pinNumber);
 		
 		
 	}
 	else 
 	{
 		
-		port->BSRR=(1<<pinNumber);
+		
+		port->BSRR=(1<<(pinNumber + 16));
 		
 		
 	}
