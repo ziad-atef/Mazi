@@ -89,6 +89,6 @@ static void config_pin_speed(GPIO_TypeDef *port,uint32_t pinNumber,uint32_t pinS
 void gpio_write(GPIO_TypeDef *port,uint32_t pinNumber,uint8_t state);
 void gpio_toggle(GPIO_TypeDef *port,uint32_t pinNumber);
 void gpio_init(GPIO_TYPE gpio_type);
-
+uint8_t gpio_read(GPIO_TypeDef *port,uint32_t pinNumber);
 
 #endif

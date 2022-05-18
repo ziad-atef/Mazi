@@ -1,41 +1,62 @@
-#include "Drivers\ADC\ADC.h"
-#include "Drivers\GPIO\_HAL_GPIO.h"
+#include "ADC.h"
+//#include "help_func.h"
+#include "PWM.h"       
 
-int main(void) // test ADC
+//char num[10];
+int analog_rx = 0;
+int main(void)
 {
-
-
-	GPIO_TYPE potentiometer_GPIO;
-	potentiometer_GPIO.port=GPIOA;
-	potentiometer_GPIO.pin=7;
-	potentiometer_GPIO.mode=INPUT_MODE;
-	potentiometer_GPIO.mode_type=INPUT_ANALOG ;
-	potentiometer_GPIO.speed=SPEED_50MHZ;
-	gpio_init(potentiometer_GPIO);
+// Initialize the ADC
+	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
+	systick_init();
+	ADC_init(adc1, PORTA, 0);
 	
 	
-    GPIO_TYPE LED_GPIO;
-	LED_GPIO.port=GPIOA;
-	LED_GPIO.pin=8;
-	LED_GPIO.mode=OUTPUT_MODE;
-	LED_GPIO.mode_type=OUTPUT_ALT_FUNCTION ;
-	LED_GPIO.speed=SPEED_50MHZ;
-	gpio_init(LED_GPIO);
+//	init_GP(PA8,OUT50,O_AF_PP);
 	
-
-    // systick_init();
-    ADC_init(adc1, potentiometer_GPIO, potentiometer_GPIO.pin);
-    int analog = 0;
-
-    while (1)
-    {
-        if (ADC_startConversion(adc1, potentiometer_GPIO.pin))
-        {
-            if (ADC_conversionDone(adc1, potentiometer_GPIO.pin)) // instead of check
-            {
-                analog = ADC_getData(adc1, potentiometer_GPIO.pin);
-                
-            }
-        }
-    }
+	GPIO_TYPE gp;
+	gp.port=PORTA;
+	gp.pin= 8;
+	gp.mode=OUTPUT_MODE;
+	gp.mode_type=OUTPUT_ALT_FUNCTION;
+	gp.speed=SPEED_50MHZ;
+	
+	gpio_init(gp);
+	PWM_Init(PORTA,8, 2, 60000);
+	
+	GPIO_TYPE gp1;
+	gp1.port=PORTA;
+	gp1.pin= 7;
+	gp1.mode=INPUT_MODE;
+	gp1.mode_type=INPUT_PU_PD;
+	gp1.speed=SPEED_50MHZ;
+	
+	gpio_init(gp1);
+	
+	GPIO_TYPE gp2;
+	gp2.port=PORTA;
+	gp2.pin= 6;
+	gp2.mode=OUTPUT_MODE;
+	gp2.mode_type=OUTPUT_GEN_PURPOSE;
+	gp2.speed=SPEED_50MHZ;
+	
+	gpio_init(gp2);
+	
+while(1)
+{
+	if(ADC_checkData(adc1))
+	{
+		analog_rx=ADC_getData(adc1);
+		PWM_Start(PORTA,8,  analog_rx*6);
+	}
+	if(gpio_read(PORTA,7))
+	{
+		gpio_write(PORTA,6,0);
+		while(gpio_read(PORTA,7)){}
+	}
+	else
+		{
+		gpio_write(PORTA,6,1);
+	}
+}
 }
