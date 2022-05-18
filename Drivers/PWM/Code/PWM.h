@@ -22,11 +22,11 @@
 																									all the definitions of the 
 																									device registers
 																							 */
-#include "../../../Includes/Std_Types.h"			 /* 
+#include "Includes/Std_Types.h"			 /* 
 																									Includes the generic types to 
 																									be used
 																							 */
-#include "../../../Includes/Common_Macros.h"	 /* 
+#include "Includes/Common_Macros.h"	 /* 
 																									Includes important macros to 
 																									be used
 																							 */

@@ -1,9 +1,8 @@
 #include "ADC.h"
 
 char ADC_init(char adc, GPIO_TypeDef* port, short pin)
-//void ADC_init(ADC_Confiration)
 {
-	char channel = 0; //we've 16 channels
+	char channel; //we've 16 channels
 	char result = 0; //value read from adc
 	GPIO_TYPE gp;
 	gp.mode=INPUT_MODE;
@@ -12,44 +11,40 @@ char ADC_init(char adc, GPIO_TypeDef* port, short pin)
 	//get channel according to pin and port used
 	//get it from data sheet
 
-	if(port == GPIOA)
+	if(port == PORTA)
 	{
 		if(pin < 8)
 		{
 			result =1; //we reached a channel successfully
 			channel = pin;
-			gp.port=GPIOA;
+			gp.port=PORTA;
 			gp.pin= pin;
 		}
 	}
-	else if(port == GPIOB)
+	else if(port == PORTB)
 	{
 		if(pin < 2)
 		{
 			result =1; //we reached a channel successfully
 			channel = pin + 8;
-			gp.port=GPIOB;
+			gp.port=PORTB;
 			gp.pin= pin;
 
 		}
 	}
-	else if(port == GPIOC)
+	else if(port == PORTC)
 	{
 		if(pin < 6)
 		{
 			result =1; //we reached a channel successfully
 			channel = pin + 10;
-			gp.port=GPIOC;
+			gp.port=PORTC;
 			gp.pin= pin;
 
 		}
 	}
 	if(result)
 	{
-//		HAL_GPIO_Init(port, pin, IN, I_AN);
-//		HAL_GPIO_Init(GPIOx, GPIO_Init);
-//		MX_GPIO_Init();
-
 		gpio_init(gp);
 
 		if(adc == adc1)
@@ -65,7 +60,8 @@ char ADC_init(char adc, GPIO_TypeDef* port, short pin)
 			//ADON A/D converter on/off, we must set it 1 twice
 			ADC1->CR2 |= 1;
 //			HAL_Delay(100);
-			delay(100);
+//			delay(100);
+			DelayMs(100);
 			ADC1->CR2 |= 1;
 
 			//make continuous conversion,
@@ -85,99 +81,42 @@ char ADC_init(char adc, GPIO_TypeDef* port, short pin)
 
 			//make continuous conversion,
 			//whenever we need conversion, begin conversion again and again
-			//I think this will be used if we don't make continuous conversion
 
-			//ADC2->CR2 |= 2;
+			ADC2->CR2 |= 2;
+			DelayMs(100);
+			ADC2->CR2 |= 1;
+			ADC2->CR2 |= 2;
 		}
 	}
 	return result;
 }
 
 // check if the data is ready
-//char adc_check(char adc, short port, short pin)
-//{
-//	char check = 0;
-//	if(adc == adc1)
-//		{
-//			//status register
-//			if(ADC1->SR & 2)
-//			{
-//				check  = 1;
-//			}
-//		}
-//		else if(adc == adc2)
-//		{
-//			if(ADC2->SR & 2)
-//			{
-//				check  = 1;
-//			}
-//		}
-//
-//
-//	return check;
-//}
-
-char ADC_startConversion(char adc, short pin)
+char ADC_checkData(char adc)
 {
-	//this code was put in init
-	//power on the adc from control register
-	//ADON A/D converter on/off, we must set it 1 twice
-	ADC2->CR2 |= 1;
-	HAL_Delay(100);
-	ADC2->CR2 |= 1;
-
-	//this is my code :')
-	//check the start bit in the status register
-	char checkIfStarted = 0;
-	if(adc == adc1)
-		{
-			//status register
-			if(ADC1->SR & 16)
-			{
-				checkIfStarted  = 1;
-			}
-		}
-		else if(adc == adc2)
-		{
-			if(ADC2->SR & 16)
-			{
-				checkIfStarted  = 1;
-			}
-		}
-
-
-	return checkIfStarted;
-}
-
-//check EOC in ADCx->SR & 2 for end of conversion
-//EOC -> 0 : conversion not complete
-//EOC -> 1: conversion complete
-char ADC_conversionDone(char adc, short pin)
-{
-	char checkIfDone = 0;
+	char check = 0;
 	if(adc == adc1)
 		{
 			//status register
 			if(ADC1->SR & 2)
 			{
-				checkIfDone  = 1;
+				check  = 1;
 			}
 		}
 		else if(adc == adc2)
 		{
 			if(ADC2->SR & 2)
 			{
-				checkIfDone  = 1;
+				check  = 1;
 			}
 		}
 
 
-	return checkIfDone;
+	return check;
 }
 
-
 // Reading the ADC value
-int ADC_getData(char adc, short pin)
+int ADC_getData(char adc)
 {
 	int result = 0;
 	int data = 0;

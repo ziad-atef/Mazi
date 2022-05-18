@@ -1,5 +1,5 @@
 
-#include"PWM.h"
+#include "PWM.h"
 
 /*******************************************************************************
 * Service Name: PWM_Init
@@ -186,11 +186,11 @@ void PWM_Start(uint8 PinNum, uint16 Duty)
 		break;
 		case PA8:
 			TIM1->CCR1 = Duty;
-			TIM1->CCER |= (1<<0);
+			TIM1->CCER |= 0x1;
 		break;
 		case PA9:
 			TIM1->CCR2 = Duty;
-			TIM1->CCER |= (1<<1);
+			TIM1->CCER |= 0x10;
 		break;
 		case PA10:
 			TIM1->CCR3 = Duty;
