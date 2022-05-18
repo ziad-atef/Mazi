@@ -2,16 +2,16 @@
 #include "Sensors.h"
 
 // PID parameters
-const float kp = 0.06;
+const float kp = 0.08;
 const float ki = 0;
-const float kd = 0.5;
+const float kd = 0.6;
 unsigned int last_proportional = 0;
 long integral = 0;
 
 void setup()
 {
 
-  Serial.begin(9600);
+  Serial.begin(19200);
 
   setup_motors();
   init_motors();
@@ -32,8 +32,8 @@ void loop()
   int proportional = (int)position - diff;
 
   // To ignore small errors
-  if (abs(proportional) <= 50)
-    proportional = 0;
+  // if (abs(proportional) <= 50)
+  // proportional = 0;
 
   // Compute the derivative (change) and integral (sum) of the
   // position.
@@ -55,9 +55,9 @@ void loop()
   int maximum = MAX_SPEED;
 
   // To slow down for turns
-  if (abs(proportional) > 500)
+  if (abs(proportional) >= 400)
   {
-    int d = map(abs(proportional), 500, 1000, 20, 50);
+    int d = map(abs(proportional), 400, 1000, 20, 40);
     maximum -= d;
   }
 

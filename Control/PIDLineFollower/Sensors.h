@@ -29,9 +29,10 @@
 #define INV 850 // Value used to reverse IR readings to be heigh for dark colors
 
 #define CL0 350 // Value used to calibrate IR0 sensor
-#define CL4 200 // Value used to calibrate IR4 sensor
+#define CL4 250 // Value used to calibrate IR4 sensor
 
 #define _numSensors 5
+static int last_value = 0;
 
 /*******************************************************************************
  *                              Function Prototypes                            *
