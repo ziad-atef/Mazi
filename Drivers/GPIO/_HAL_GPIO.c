@@ -1,4 +1,4 @@
-#include "Drivers/GPIO/_HAL_GPIO.h"
+#include "_HAL_GPIO.h"
 #include <stdint.h>
 
 uint32_t PINPOS [16]={
@@ -188,3 +188,8 @@ void gpio_init(GPIO_TYPE gpio_type)
 	
 }
 
+uint8_t gpio_read(GPIO_TypeDef *port,uint32_t pinNumber)
+{
+	return (port->IDR & (1<<pinNumber));
+
+}
