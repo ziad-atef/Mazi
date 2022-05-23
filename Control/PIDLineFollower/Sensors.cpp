@@ -20,10 +20,10 @@ void calibrate_readings(int *sensors_readings)
 unsigned read_line(int *sensors_readings)
 {
     unsigned char i, on_line = 0;
-    unsigned long avg;         // this is for the weighted total, which is long
-                               // before division
-    unsigned int sum;          // this is for the denominator which is <= 64000
-    static int last_value = 0; // assume initially that the line is left.
+    unsigned long avg; // this is for the weighted total, which is long
+                       // before division
+    unsigned int sum;  // this is for the denominator which is <= 64000
+    // static int last_value = 0; // assume initially that the line is left.
 
     avg = 0;
     sum = 0;
@@ -54,12 +54,12 @@ unsigned read_line(int *sensors_readings)
 
         // If it last read to the right of center, return the max.
         else
-            return (_numSensors - 1) * 1000;
+            return (_numSensors - 1) * 500;
     }
 
-    last_value = avg / sum;
+    last_value = (avg / sum) / 2;
 
-    return last_value / 2;
+    return last_value;
 }
 
 void log_readings(int *sensors_readings, int proportional)

@@ -1,4 +1,3 @@
-
  /******************************************************************************
  *
  * Module: PWM
@@ -12,9 +11,7 @@
 
 #ifndef PWM_SRC_PWM_C_
 #define PWM_SRC_PWM_C_
-
-
-#include "../Inc/PWM.h"
+#include "PWM.h"
 
 /*******************************************************************************
 * Service Name: PWM_Init
@@ -111,7 +108,6 @@ void PWM_Init(GPIO_TypeDef *port, uint32_t pinNumber, uint16 Prescalar, uint16 R
 			default:
 			break;
 		}
-
 		TIM2->BDTR |= 0x8000;											/*Not needed*/
 		TIM2->CR1 |= 1;
 	}
@@ -120,8 +116,8 @@ void PWM_Init(GPIO_TypeDef *port, uint32_t pinNumber, uint16 Prescalar, uint16 R
 			(port == GPIOB && (pinNumber == 0 || pinNumber == 1)))
 	{
 		RCC->APB2ENR |= RCC_APB1ENR_TIM3EN;			/* Enabling CLK for Timer1 Module*/
-
-		TIM3->PSC = Prescalar-1;									/*
+		
+		TIM3->PSC = Prescalar-1;									/* 
 																							 Setting prescalar value for timer 1
 																							 where Ftimer = Fclk/(Prescalar+1)
 																						*/
@@ -154,7 +150,6 @@ void PWM_Init(GPIO_TypeDef *port, uint32_t pinNumber, uint16 Prescalar, uint16 R
 			default:
 			break;
 		}
-
 		TIM3->BDTR |= 0x8000;                  /*Not needed*/
 		TIM3->CR1 |= 1;
 	}
@@ -326,6 +321,24 @@ void PWM_Start(GPIO_TypeDef *port, uint32_t pinNumber, uint16 Duty)
 				TIM3->CCR2 = Duty;
 				TIM3->CCER |= (1<<1);
 				break;
+      case 8:
+			  TIM1->CCR1 = Duty;
+			  TIM1->CCER |= 0x1;
+		    break;
+		  case 9:
+			  TIM1->CCR2 = Duty;
+			  TIM1->CCER |= 0x10;
+		    break;
+		  case 10:
+			  TIM1->CCR3 = Duty;
+			  TIM1->CCER |= (1<<2);
+		    break;
+		  case 11:			
+			  TIM1->CCR4 = Duty;
+			  TIM1->CCER |= (1<<3);
+		    break;
+      default:
+        break;
 		}
 	}
 	else if(port == GPIOB)
