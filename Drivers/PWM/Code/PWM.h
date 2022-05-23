@@ -10,16 +10,16 @@
  * Author: Ziad Atef
  ******************************************************************************/
 
-#ifndef _PWM_H_
-#define _PWM_H_
+#ifndef PWM_INC_PWM_H_
+#define PWM_INC_PWM_H_
 
 /*******************************************************************************
  *                                  Includes                                   *
  *******************************************************************************/
 
-#include "stm32f10x.h"                         /* 
-																									Device header which includes 
-																									all the definitions of the 
+#include "stm32f1xx.h"                         /*
+																									Device header which includes
+																									all the definitions of the
 																									device registers
 																							 */
 #include "Includes/Std_Types.h"			 /* 
@@ -80,14 +80,14 @@
 * Parameters (out): None
 * Return value: None
 * Description: Initialize the pin specified to be a pwm pin.
-*							 Beware when initializing pins that multiple pins initialize the 
+*							 Beware when initializing pins that multiple pins initialize the
 *							 same timer module:-
-*							 -Timer1: PA8, PA9, PA10, PA11 
+*							 -Timer1: PA8, PA9, PA10, PA11
 *							 -Timer2:	PA0, PA1, PA2, PA3
 *							 -Timer3:	PA6, PA7, PB0, PB1
 ********************************************************************************/
-void PWM_Init(uint8 PinNum, uint16 Prescalar, uint16 ReloadVal);
-
+//void PWM_Init( uint8 PinNum, uint16 Prescalar, uint16 ReloadVal);
+void PWM_Init(GPIO_TypeDef *port, uint32_t pinNumber, uint16 Prescalar, uint16 ReloadVal);
 /*******************************************************************************
 * Service Name: PWM_Start
 * Sync/Async: Synchronous
@@ -100,9 +100,12 @@ void PWM_Init(uint8 PinNum, uint16 Prescalar, uint16 ReloadVal);
 * Description: Begin generating PWM signal with the specified duty cycle on the
 *							 specified pin.
 ********************************************************************************/
-void PWM_Start(uint8 PinNum, uint16 Duty);
+//void PWM_Start(uint8 PinNum, uint16 Duty);
+void PWM_Start(GPIO_TypeDef *port, uint32_t pinNumber, uint16 Duty);
+
 /*******************************************************************************
  *                       External Variables                                    *
  *******************************************************************************/
 
-#endif /* PWM_H */
+
+#endif /* PWM_INC_PWM_H_ */

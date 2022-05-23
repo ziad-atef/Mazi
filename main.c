@@ -11,28 +11,50 @@ int main(void)
 	systick_init();
 	ADC_init(adc1, PORTA, 0);
 	
-	
-//	init_GP(PA,8,OUT50,O_AF_PP);
-	
-	GPIO_TYPE gp;
-	gp.port=PORTA;
-	gp.pin= 8;
-	gp.mode=OUTPUT_MODE;
-	gp.mode_type=OUTPUT_ALT_FUNCTION;
-//	gp.pull;
-	gp.speed=SPEED_50MHZ;
-//	RCC->APB2ENR |= (1<<0); //gp.alt_func;GPIO_CLOCK_ENABLE_ALT_FUNC
-//	RCC->APB2ENR |= (1<<2); //GPIO_CLOCK_ENABLE_PORTA
-	
+		
+	GPIO_TYPE gp = {
+    .port=PORTA,
+    .pin= 8,
+    .mode=OUTPUT_MODE,
+    .mode_type=OUTPUT_ALT_FUNCTION,
+    .speed=SPEED_50MHZ    
+  };	
 	gpio_init(gp);
-	PWM_Init(PA8, 2, 60000);
+	PWM_Init(PORTA,8, 2, 60000);
 	
-while(1)
-{
-	if(ADC_checkData(adc1))
-	{
-		analog_rx=ADC_getData(adc1);
-		PWM_Start(PA8,  analog_rx*6);
-	}
-}
+	GPIO_TYPE gp1 = {
+    .port=PORTA,
+    .pin=7,
+    .mode=INPUT_MODE,
+    .mode_type=INPUT_PU_PD,
+    .speed=SPEED_50MHZ    
+  };	
+	gpio_init(gp1);
+	
+	GPIO_TYPE gp2= {
+    .port=PORTA,
+    .pin=6,
+    .mode=OUTPUT_MODE,
+    .mode_type=OUTPUT_GEN_PURPOSE,
+    .speed=SPEED_50MHZ    
+  }
+	gpio_init(gp2);
+	
+  while(1)
+  {
+    if(ADC_checkData(adc1))
+    {
+      analog_rx=ADC_getData(adc1);
+      PWM_Start(PORTA,8,  analog_rx*6);
+    }
+    if(gpio_read(PORTA,7))
+    {
+      gpio_write(PORTA,6,0);
+      while(gpio_read(PORTA,7)){}
+    }
+    else
+    {
+      gpio_write(PORTA,6,1);
+    }
+  }
 }
