@@ -64,4 +64,8 @@ int main(void)
 
     simplify_path(path, &path_length);
   }
+  while (1)
+  {
+    // store path
+  }
 }
