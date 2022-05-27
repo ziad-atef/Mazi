@@ -8,7 +8,12 @@ void follow_segment(int *sensor_readings)
     while (1)
     {
         /* Implement ME */
-
+        if (sensor_readings[1] <= BLACK_THRESH && sensor_readings[3] > BLACK_THRESH)
+            turn_left();
+        if (sensor_readings[1] > BLACK_THRESH && sensor_readings[3] <= BLACK_THRESH)
+            turn_right();
+        if (sensor_readings[1] > BLACK_THRESH && sensor_readings[3] > BLACK_THRESH)
+            forward();
         if (end_segment(sensor_readings) == TRUE)
             return;
     }
@@ -16,18 +21,27 @@ void follow_segment(int *sensor_readings)
 boolean end_segment(int *sensor_readings)
 {
     /* Implement ME */
-    return TRUE;
+    if (sensor_readings[0] <= BLACK_THRESH || sensor_readings[4] <= BLACK_THRESH)
+        return TRUE;
+    forward();
+    get_readings(sensor_readings);
+    delay(100); // REVISIT
+    if (sensor_readings[0] > BLACK_THRESH && sensor_readings[1] > BLACK_THRESH &&
+        sensor_readings[2] > BLACK_THRESH && sensor_readings[3] > BLACK_THRESH &&
+        sensor_readings[4] > BLACK_THRESH)
+        return TRUE;
+    return FALSE;
 }
 // REVISIT THIS FUNCTION
 void check_intersection_lines(int *sensor_readings, boolean *left, boolean *straight, boolean *right)
 {
-    if (sensor_readings[1] > BLACK_THRESH && sensor_readings[2] <= BLACK_THRESH && sensor_readings[3] <= BLACK_THRESH)
+    if (sensor_readings[0] <= BLACK_THRESH && sensor_readings[4] > BLACK_THRESH)
         *left = TRUE;
 
-    if (sensor_readings[1] < BLACK_THRESH && sensor_readings[2] <= BLACK_THRESH && sensor_readings[3] > BLACK_THRESH)
+    if (sensor_readings[0] > BLACK_THRESH && sensor_readings[4] <= BLACK_THRESH)
         *right = TRUE;
 
-    if (sensor_readings[1] < BLACK_THRESH && sensor_readings[2] <= BLACK_THRESH && sensor_readings[3] > BLACK_THRESH)
+    if (sensor_readings[2] <= BLACK_THRESH)
         *straight = TRUE;
 }
 uint8 select_turn(boolean left, boolean straight, boolean right)
@@ -73,17 +87,16 @@ void simplify_path(char *path, uint16 *path_length)
 }
 void turn(uint8 direction)
 {
-    int speed1 = 0, speed2 = 0;
     switch (direction)
     {
     case 'L':
-        change_speed(speed1, speed2);
+        turn_left();
         break;
     case 'B':
-        change_speed(speed1, speed2);
+        backward();
         break;
     case 'R':
-        change_speed(speed1, speed2);
+        turn_right();
         break;
     default:
         break;

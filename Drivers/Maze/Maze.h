@@ -3,7 +3,7 @@
 #include "../../Includes/Platform_Types.h"
 #include "../Motors/Motors.h"
 
-#define BLACK_THRESH 200
+#define BLACK_THRESH 500
 
 
 void follow_segment(int *sensor_readings);
