@@ -16,11 +16,11 @@
  *                                  Includes                                   *
  *******************************************************************************/
 
-#include "stm32f10x.h"                         /* 
-																									Device header which includes 
-																									all the definitions of the 
-																									device registers
-																							 */
+//#include "stm32f10x.h"                         /*
+//																									Device header which includes
+//																									all the definitions of the
+//																									device registers
+//																							 */
 #include "../../../Includes/Std_Types.h"			 /* 
 																									Includes the generic types to 
 																									be used

@@ -1,3 +1,6 @@
+#ifndef GPIO_SRC_PWM_C_
+#define GPIO_SRC_PWM_C_
+
 #include "_HAL_GPIO.h"
 #include <stdint.h>
 
@@ -193,3 +196,5 @@ uint8_t gpio_read(GPIO_TypeDef *port,uint32_t pinNumber)
 	return (port->IDR & (1<<pinNumber));
 
 }
+
+#endif

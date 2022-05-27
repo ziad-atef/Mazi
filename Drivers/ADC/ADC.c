@@ -1,3 +1,6 @@
+#ifndef ADC_SRC_PWM_C_
+#define ADC_SRC_PWM_C_
+
 #include "ADC.h"
 
 char ADC_init(char adc, GPIO_TypeDef* port, short pin)
@@ -136,3 +139,5 @@ int ADC_getData(char adc)
 
 	return result;
 }
+
+#endif

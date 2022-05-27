@@ -117,32 +117,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named stm32-blupill.out
+# Target rules for targets named stm32-blupill.elf
 
 # Build rule for target.
-stm32-blupill.out: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stm32-blupill.out
-.PHONY : stm32-blupill.out
+stm32-blupill.elf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stm32-blupill.elf
+.PHONY : stm32-blupill.elf
 
 # fast build rule for target.
-stm32-blupill.out/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/build
-.PHONY : stm32-blupill.out/fast
+stm32-blupill.elf/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/build
+.PHONY : stm32-blupill.elf/fast
 
-Drivers/ADC/ADC.o: Drivers/ADC/ADC.c.o
-.PHONY : Drivers/ADC/ADC.o
+Drivers/ADC/ADC.obj: Drivers/ADC/ADC.c.obj
+.PHONY : Drivers/ADC/ADC.obj
 
 # target to build an object file
-Drivers/ADC/ADC.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/ADC/ADC.c.o
-.PHONY : Drivers/ADC/ADC.c.o
+Drivers/ADC/ADC.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/ADC/ADC.c.obj
+.PHONY : Drivers/ADC/ADC.c.obj
 
 Drivers/ADC/ADC.i: Drivers/ADC/ADC.c.i
 .PHONY : Drivers/ADC/ADC.i
 
 # target to preprocess a source file
 Drivers/ADC/ADC.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/ADC/ADC.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/ADC/ADC.c.i
 .PHONY : Drivers/ADC/ADC.c.i
 
 Drivers/ADC/ADC.s: Drivers/ADC/ADC.c.s
@@ -150,23 +150,23 @@ Drivers/ADC/ADC.s: Drivers/ADC/ADC.c.s
 
 # target to generate assembly for a file
 Drivers/ADC/ADC.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/ADC/ADC.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/ADC/ADC.c.s
 .PHONY : Drivers/ADC/ADC.c.s
 
-Drivers/EXTI/EXTINT.o: Drivers/EXTI/EXTINT.c.o
-.PHONY : Drivers/EXTI/EXTINT.o
+Drivers/EXTI/EXTINT.obj: Drivers/EXTI/EXTINT.c.obj
+.PHONY : Drivers/EXTI/EXTINT.obj
 
 # target to build an object file
-Drivers/EXTI/EXTINT.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/EXTI/EXTINT.c.o
-.PHONY : Drivers/EXTI/EXTINT.c.o
+Drivers/EXTI/EXTINT.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/EXTI/EXTINT.c.obj
+.PHONY : Drivers/EXTI/EXTINT.c.obj
 
 Drivers/EXTI/EXTINT.i: Drivers/EXTI/EXTINT.c.i
 .PHONY : Drivers/EXTI/EXTINT.i
 
 # target to preprocess a source file
 Drivers/EXTI/EXTINT.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/EXTI/EXTINT.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/EXTI/EXTINT.c.i
 .PHONY : Drivers/EXTI/EXTINT.c.i
 
 Drivers/EXTI/EXTINT.s: Drivers/EXTI/EXTINT.c.s
@@ -174,23 +174,23 @@ Drivers/EXTI/EXTINT.s: Drivers/EXTI/EXTINT.c.s
 
 # target to generate assembly for a file
 Drivers/EXTI/EXTINT.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/EXTI/EXTINT.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/EXTI/EXTINT.c.s
 .PHONY : Drivers/EXTI/EXTINT.c.s
 
-Drivers/GPIO/_HAL_GPIO.o: Drivers/GPIO/_HAL_GPIO.c.o
-.PHONY : Drivers/GPIO/_HAL_GPIO.o
+Drivers/GPIO/_HAL_GPIO.obj: Drivers/GPIO/_HAL_GPIO.c.obj
+.PHONY : Drivers/GPIO/_HAL_GPIO.obj
 
 # target to build an object file
-Drivers/GPIO/_HAL_GPIO.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/GPIO/_HAL_GPIO.c.o
-.PHONY : Drivers/GPIO/_HAL_GPIO.c.o
+Drivers/GPIO/_HAL_GPIO.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/GPIO/_HAL_GPIO.c.obj
+.PHONY : Drivers/GPIO/_HAL_GPIO.c.obj
 
 Drivers/GPIO/_HAL_GPIO.i: Drivers/GPIO/_HAL_GPIO.c.i
 .PHONY : Drivers/GPIO/_HAL_GPIO.i
 
 # target to preprocess a source file
 Drivers/GPIO/_HAL_GPIO.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/GPIO/_HAL_GPIO.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/GPIO/_HAL_GPIO.c.i
 .PHONY : Drivers/GPIO/_HAL_GPIO.c.i
 
 Drivers/GPIO/_HAL_GPIO.s: Drivers/GPIO/_HAL_GPIO.c.s
@@ -198,23 +198,47 @@ Drivers/GPIO/_HAL_GPIO.s: Drivers/GPIO/_HAL_GPIO.c.s
 
 # target to generate assembly for a file
 Drivers/GPIO/_HAL_GPIO.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/GPIO/_HAL_GPIO.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/GPIO/_HAL_GPIO.c.s
 .PHONY : Drivers/GPIO/_HAL_GPIO.c.s
 
-Drivers/Motors/Motors.o: Drivers/Motors/Motors.c.o
-.PHONY : Drivers/Motors/Motors.o
+Drivers/Maze/Maze.obj: Drivers/Maze/Maze.c.obj
+.PHONY : Drivers/Maze/Maze.obj
 
 # target to build an object file
-Drivers/Motors/Motors.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Motors/Motors.c.o
-.PHONY : Drivers/Motors/Motors.c.o
+Drivers/Maze/Maze.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Maze/Maze.c.obj
+.PHONY : Drivers/Maze/Maze.c.obj
+
+Drivers/Maze/Maze.i: Drivers/Maze/Maze.c.i
+.PHONY : Drivers/Maze/Maze.i
+
+# target to preprocess a source file
+Drivers/Maze/Maze.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Maze/Maze.c.i
+.PHONY : Drivers/Maze/Maze.c.i
+
+Drivers/Maze/Maze.s: Drivers/Maze/Maze.c.s
+.PHONY : Drivers/Maze/Maze.s
+
+# target to generate assembly for a file
+Drivers/Maze/Maze.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Maze/Maze.c.s
+.PHONY : Drivers/Maze/Maze.c.s
+
+Drivers/Motors/Motors.obj: Drivers/Motors/Motors.c.obj
+.PHONY : Drivers/Motors/Motors.obj
+
+# target to build an object file
+Drivers/Motors/Motors.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Motors/Motors.c.obj
+.PHONY : Drivers/Motors/Motors.c.obj
 
 Drivers/Motors/Motors.i: Drivers/Motors/Motors.c.i
 .PHONY : Drivers/Motors/Motors.i
 
 # target to preprocess a source file
 Drivers/Motors/Motors.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Motors/Motors.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Motors/Motors.c.i
 .PHONY : Drivers/Motors/Motors.c.i
 
 Drivers/Motors/Motors.s: Drivers/Motors/Motors.c.s
@@ -222,23 +246,23 @@ Drivers/Motors/Motors.s: Drivers/Motors/Motors.c.s
 
 # target to generate assembly for a file
 Drivers/Motors/Motors.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Motors/Motors.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Motors/Motors.c.s
 .PHONY : Drivers/Motors/Motors.c.s
 
-Drivers/PWM/PWM.o: Drivers/PWM/PWM.c.o
-.PHONY : Drivers/PWM/PWM.o
+Drivers/PWM/PWM.obj: Drivers/PWM/PWM.c.obj
+.PHONY : Drivers/PWM/PWM.obj
 
 # target to build an object file
-Drivers/PWM/PWM.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/PWM/PWM.c.o
-.PHONY : Drivers/PWM/PWM.c.o
+Drivers/PWM/PWM.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/PWM/PWM.c.obj
+.PHONY : Drivers/PWM/PWM.c.obj
 
 Drivers/PWM/PWM.i: Drivers/PWM/PWM.c.i
 .PHONY : Drivers/PWM/PWM.i
 
 # target to preprocess a source file
 Drivers/PWM/PWM.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/PWM/PWM.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/PWM/PWM.c.i
 .PHONY : Drivers/PWM/PWM.c.i
 
 Drivers/PWM/PWM.s: Drivers/PWM/PWM.c.s
@@ -246,23 +270,23 @@ Drivers/PWM/PWM.s: Drivers/PWM/PWM.c.s
 
 # target to generate assembly for a file
 Drivers/PWM/PWM.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/PWM/PWM.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/PWM/PWM.c.s
 .PHONY : Drivers/PWM/PWM.c.s
 
-Drivers/Sensors/Sensors.o: Drivers/Sensors/Sensors.c.o
-.PHONY : Drivers/Sensors/Sensors.o
+Drivers/Sensors/Sensors.obj: Drivers/Sensors/Sensors.c.obj
+.PHONY : Drivers/Sensors/Sensors.obj
 
 # target to build an object file
-Drivers/Sensors/Sensors.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Sensors/Sensors.c.o
-.PHONY : Drivers/Sensors/Sensors.c.o
+Drivers/Sensors/Sensors.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Sensors/Sensors.c.obj
+.PHONY : Drivers/Sensors/Sensors.c.obj
 
 Drivers/Sensors/Sensors.i: Drivers/Sensors/Sensors.c.i
 .PHONY : Drivers/Sensors/Sensors.i
 
 # target to preprocess a source file
 Drivers/Sensors/Sensors.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Sensors/Sensors.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Sensors/Sensors.c.i
 .PHONY : Drivers/Sensors/Sensors.c.i
 
 Drivers/Sensors/Sensors.s: Drivers/Sensors/Sensors.c.s
@@ -270,23 +294,47 @@ Drivers/Sensors/Sensors.s: Drivers/Sensors/Sensors.c.s
 
 # target to generate assembly for a file
 Drivers/Sensors/Sensors.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Sensors/Sensors.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Drivers/Sensors/Sensors.c.s
 .PHONY : Drivers/Sensors/Sensors.c.s
 
-main.o: main.c.o
-.PHONY : main.o
+Includes/systick_time.obj: Includes/systick_time.c.obj
+.PHONY : Includes/systick_time.obj
 
 # target to build an object file
-main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/main.c.o
-.PHONY : main.c.o
+Includes/systick_time.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Includes/systick_time.c.obj
+.PHONY : Includes/systick_time.c.obj
+
+Includes/systick_time.i: Includes/systick_time.c.i
+.PHONY : Includes/systick_time.i
+
+# target to preprocess a source file
+Includes/systick_time.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Includes/systick_time.c.i
+.PHONY : Includes/systick_time.c.i
+
+Includes/systick_time.s: Includes/systick_time.c.s
+.PHONY : Includes/systick_time.s
+
+# target to generate assembly for a file
+Includes/systick_time.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/Includes/systick_time.c.s
+.PHONY : Includes/systick_time.c.s
+
+main.obj: main.c.obj
+.PHONY : main.obj
+
+# target to build an object file
+main.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/main.c.obj
+.PHONY : main.c.obj
 
 main.i: main.c.i
 .PHONY : main.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -294,7 +342,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.elf.dir/build.make CMakeFiles/stm32-blupill.elf.dir/main.c.s
 .PHONY : main.c.s
 
 # Help Target
@@ -305,26 +353,32 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... stm32-blupill.out"
-	@echo "... Drivers/ADC/ADC.o"
+	@echo "... stm32-blupill.elf"
+	@echo "... Drivers/ADC/ADC.obj"
 	@echo "... Drivers/ADC/ADC.i"
 	@echo "... Drivers/ADC/ADC.s"
-	@echo "... Drivers/EXTI/EXTINT.o"
+	@echo "... Drivers/EXTI/EXTINT.obj"
 	@echo "... Drivers/EXTI/EXTINT.i"
 	@echo "... Drivers/EXTI/EXTINT.s"
-	@echo "... Drivers/GPIO/_HAL_GPIO.o"
+	@echo "... Drivers/GPIO/_HAL_GPIO.obj"
 	@echo "... Drivers/GPIO/_HAL_GPIO.i"
 	@echo "... Drivers/GPIO/_HAL_GPIO.s"
-	@echo "... Drivers/Motors/Motors.o"
+	@echo "... Drivers/Maze/Maze.obj"
+	@echo "... Drivers/Maze/Maze.i"
+	@echo "... Drivers/Maze/Maze.s"
+	@echo "... Drivers/Motors/Motors.obj"
 	@echo "... Drivers/Motors/Motors.i"
 	@echo "... Drivers/Motors/Motors.s"
-	@echo "... Drivers/PWM/PWM.o"
+	@echo "... Drivers/PWM/PWM.obj"
 	@echo "... Drivers/PWM/PWM.i"
 	@echo "... Drivers/PWM/PWM.s"
-	@echo "... Drivers/Sensors/Sensors.o"
+	@echo "... Drivers/Sensors/Sensors.obj"
 	@echo "... Drivers/Sensors/Sensors.i"
 	@echo "... Drivers/Sensors/Sensors.s"
-	@echo "... main.o"
+	@echo "... Includes/systick_time.obj"
+	@echo "... Includes/systick_time.i"
+	@echo "... Includes/systick_time.s"
+	@echo "... main.obj"
 	@echo "... main.i"
 	@echo "... main.s"
 .PHONY : help

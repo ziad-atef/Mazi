@@ -1,9 +1,9 @@
+//#include <HardwareSerial.h>
 
 #ifndef _sensors_H_
 #define _sensors_H_
 
 
-//#include <HardwareSerial.h>
 #include "../GPIO/_HAL_GPIO.h"
 #include "../ADC/ADC.h"
 
@@ -16,45 +16,6 @@
 #define _numSensors 5
 
 
-GPIO_TYPE IR0_GPIO={
-	.port 			= PORTA,
-	.pin 				= 0,
-	.mode 			= INPUT_MODE,
-	.mode_type 	= INPUT_ANALOG,
-	.speed			= SPEED_50MHZ
-};
-
-GPIO_TYPE IR1_GPIO={
-	.port 			= PORTA,
-	.pin 				= 1,
-	.mode 			= INPUT_MODE,
-	.mode_type 	= INPUT_ANALOG,
-	.speed			= SPEED_50MHZ
-};
-
-GPIO_TYPE IR2_GPIO={
-	.port 			= PORTA,
-	.pin 				= 2,
-	.mode 			= INPUT_MODE,
-	.mode_type 	= INPUT_ANALOG,
-	.speed			= SPEED_50MHZ
-};
-
-GPIO_TYPE IR3_GPIO={
-	.port 			= PORTA,
-	.pin 				= 3,
-	.mode 			= INPUT_MODE,
-	.mode_type 	= INPUT_ANALOG,
-	.speed			= SPEED_50MHZ
-};
-
-GPIO_TYPE IR4_GPIO={
-	.port 			= PORTA,
-	.pin 				= 4,
-	.mode 			= INPUT_MODE,
-	.mode_type 	= INPUT_ANALOG,
-	.speed			= SPEED_50MHZ
-};
 
 void get_readings(int *sensors_readings);
 

@@ -1,9 +1,35 @@
+#ifndef MAZE_SRC_PWM_C_
+#define MAZE_SRC_PWM_C_
+
 #include "Maze.h"
 
-void follow_segment()
+void follow_segment(int *sensor_readings)
 {
-}
+    while (1)
+    {
+        /* Implement ME */
 
+        if (end_segment(sensor_readings) == TRUE)
+            return;
+    }
+}
+boolean end_segment(int *sensor_readings)
+{
+    /* Implement ME */
+    return TRUE;
+}
+// REVISIT THIS FUNCTION
+void check_intersection_lines(int *sensor_readings, boolean *left, boolean *straight, boolean *right)
+{
+    if (sensor_readings[1] > BLACK_THRESH && sensor_readings[2] <= BLACK_THRESH && sensor_readings[3] <= BLACK_THRESH)
+        *left = TRUE;
+
+    if (sensor_readings[1] < BLACK_THRESH && sensor_readings[2] <= BLACK_THRESH && sensor_readings[3] > BLACK_THRESH)
+        *right = TRUE;
+
+    if (sensor_readings[1] < BLACK_THRESH && sensor_readings[2] <= BLACK_THRESH && sensor_readings[3] > BLACK_THRESH)
+        *straight = TRUE;
+}
 uint8 select_turn(boolean left, boolean straight, boolean right)
 {
     if (left == TRUE)
@@ -63,3 +89,4 @@ void turn(uint8 direction)
         break;
     }
 }
+#endif
