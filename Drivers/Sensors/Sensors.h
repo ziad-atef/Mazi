@@ -4,8 +4,8 @@
 
 
 //#include <HardwareSerial.h>
-#include "_HAL_GPIO.h"
-#include "ADC.h"
+#include "../GPIO/_HAL_GPIO.h"
+#include "../ADC/ADC.h"
 
 
 #define INV 850

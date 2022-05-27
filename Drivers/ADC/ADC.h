@@ -18,8 +18,8 @@
 
 //Here you should include any file you may need
 //#include "DELAY.h"
-#include "Drivers/GPIO/_HAL_GPIO.h"
-#include "Includes/systick_time.h"
+#include "../GPIO/_HAL_GPIO.h"
+#include "../../Includes/systick_time.h"
 
 /*******************************************************************************
  *                                  Definitions                                *

@@ -9,8 +9,9 @@
 #ifndef _Motors_H_
 #define _Motors_H_
 
-#include "../../GPIOs/Inc/_HAL_GPIO.h"
-#include "../../PWM/Inc/PWM.h"
+#include "../GPIO/_HAL_GPIO.h"
+
+#include "../PWM/PWM.h"
 
 #define GPIO_SPEED SPEED_50MHZ
 #define MAX_SPEED 120

@@ -13,17 +13,15 @@
 #ifndef PLATFORM_TYPES_H
 #define PLATFORM_TYPES_H
 
-
 /*
  * Boolean Values
  */
 #ifndef FALSE
-#define FALSE                                       (0U)
+#define FALSE (0U)
 #endif
 #ifndef TRUE
-#define TRUE                                        (1U)
+#define TRUE (1U)
 #endif
-
 
 typedef unsigned char           boolean;
 
@@ -46,4 +44,3 @@ typedef float                   float32;
 typedef double                  float64; 
 
 #endif /* PLATFORM_TYPES_H */
-
