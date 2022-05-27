@@ -48,14 +48,11 @@
 .tmp_versions/
 modules.order
 Module.symvers
+
 Mkfile.old
 dkms.conf
 
-objects/
-RTE/
-DebugConfig/
 *.ziada
-*.uvoptx
-*.uvprojx
+
 
 .vscode
