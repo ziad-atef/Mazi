@@ -1,90 +1,67 @@
 #include "Drivers/ADC/ADC.h"
 #include "Drivers/PWM/PWM.h"
-#include "Drivers/GPIO/_HAL_GPIO.h"
 
-#include "Drivers/Motors/Motors.h"
 #include "Drivers/Sensors/Sensors.h"
+#include "Drivers/Maze/Maze.h"
 
 #define WHITE_THRESH 500
-#define WHITE_LINE(sensor_reading) sensor_reading > WHITE_THRESH 
+#define WHITE_LINE(sensor_reading) sensor_reading > WHITE_THRESH
 
+char path[100] = "";
+uint16 path_length = 0; // the length of the path
 
-// char num[10];
-int analog_rx = 0;
 int main(void)
 {
 
   setup_motors();
   init_motors();
 
-  // // Initialize the ADC
-  // 	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;
-  // 	systick_init();
-  // 	ADC_init(adc1, PORTA, 0);
-
-  // 	GPIO_TYPE gp = {
-  //     .port=PORTA,
-  //     .pin= 8,
-  //     .mode=OUTPUT_MODE,
-  //     .mode_type=OUTPUT_ALT_FUNCTION,
-  //     .speed=SPEED_50MHZ
-  //   };
-  // 	gpio_init(gp);
-  // 	PWM_Init(PORTA,8, 2, 60000);
-
-  // 	GPIO_TYPE gp1 = {
-  //     .port=PORTA,
-  //     .pin=7,
-  //     .mode=INPUT_MODE,
-  //     .mode_type=INPUT_PU_PD,
-  //     .speed=SPEED_50MHZ
-  //   };
-  // 	gpio_init(gp1);
-
-  // 	GPIO_TYPE gp2= {
-  //     .port=PORTA,
-  //     .pin=6,
-  //     .mode=OUTPUT_MODE,
-  //     .mode_type=OUTPUT_GEN_PURPOSE,
-  //     .speed=SPEED_50MHZ
-  //   };
-  // 	gpio_init(gp2);
-
   while (1)
   {
     int sensors_readings[5];
     get_readings(sensors_readings);
     calibrate_readings(sensors_readings);
+    follow_segment(sensors_readings);
 
-    if(WHITE_LINE(sensors_readings[0]) && !WHITE_LINE(sensors_readings[1]) && WHITE_LINE(sensors_readings[2]))
-    {// straight line only
+    boolean right = FALSE;
+    boolean left = FALSE;
+    boolean straight = FALSE;
 
+    check_intersection_lines(sensors_readings, &left, &straight, &right);
+
+    // CHECK END
+    if (right == TRUE && left == TRUE && straight == TRUE)
+    {
+      change_speed(0, 0); // REVISIT
+      DelayMs(150);       // REVISIT
+      get_readings(sensors_readings);
+
+      boolean tmp_right = FALSE;
+      boolean tmp_left = FALSE;
+      boolean tmp_straight = FALSE;
+
+      check_intersection_lines(sensors_readings, &tmp_left, &tmp_straight, &tmp_right);
+
+      // End MAZE
+      if (tmp_left == TRUE && tmp_right == TRUE && tmp_straight == TRUE)
+        break;
     }
-    else if (sensors_readings[0] >=WHITE_THRESH && sensors_readings[1] < WHITE_THRESH && sensors_readings[2] < WHITE_THRESH)
-    {// straight line and right turn
-
-    }
-    else if(sensors_readings[0] < WHITE_THRESH && sensors_readings[1] < WHITE_THRESH && sensors_readings[2]>= WHITE_THRESH)
-    {// straight line and left turn
-
-    }
-    else if(sensors_readings[0] < WHITE_THRESH && sensors_readings[1]< WHITE_THRESH && sensors_readings[2] < WHITE_THRESH)
-    {// straight line, right turn, left turn
-
-    }
-    // if(ADC_checkData(adc1))
+    // Yahia's Suggestion
+    // if (left == TRUE && right == TRUE)
     // {
-    //   analog_rx=ADC_getData(adc1);
-    //   PWM_Start(PORTA,8,  analog_rx*6);
+    // change_speed(0, 0); // REVISIT
+    // DelayMs(200);       // REVISIT
+    // check_intersection_lines(sensors_readings, &left, &straight, &right);
+    // left = TRUE;
+    // right = TRUE;
     // }
-    // if(gpio_read(PORTA,7))
-    // {
-    //   gpio_write(PORTA,6,0);
-    //   while(gpio_read(PORTA,7)){}
-    // }
-    // else
-    // {
-    //   gpio_write(PORTA,6,1);
-    // }
+    uint8 direction = select_turn(left, straight, right);
+    // Move MOTORS
+    turn(direction);
+    // Store path
+    path[path_length++] = direction;
+    path_length++;
+
+    simplify_path(path, &path_length);
   }
 }

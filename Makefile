@@ -201,6 +201,30 @@ Drivers/GPIO/_HAL_GPIO.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/GPIO/_HAL_GPIO.c.s
 .PHONY : Drivers/GPIO/_HAL_GPIO.c.s
 
+Drivers/Maze/Maze.o: Drivers/Maze/Maze.c.o
+.PHONY : Drivers/Maze/Maze.o
+
+# target to build an object file
+Drivers/Maze/Maze.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Maze/Maze.c.o
+.PHONY : Drivers/Maze/Maze.c.o
+
+Drivers/Maze/Maze.i: Drivers/Maze/Maze.c.i
+.PHONY : Drivers/Maze/Maze.i
+
+# target to preprocess a source file
+Drivers/Maze/Maze.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Maze/Maze.c.i
+.PHONY : Drivers/Maze/Maze.c.i
+
+Drivers/Maze/Maze.s: Drivers/Maze/Maze.c.s
+.PHONY : Drivers/Maze/Maze.s
+
+# target to generate assembly for a file
+Drivers/Maze/Maze.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stm32-blupill.out.dir/build.make CMakeFiles/stm32-blupill.out.dir/Drivers/Maze/Maze.c.s
+.PHONY : Drivers/Maze/Maze.c.s
+
 Drivers/Motors/Motors.o: Drivers/Motors/Motors.c.o
 .PHONY : Drivers/Motors/Motors.o
 
@@ -315,6 +339,9 @@ help:
 	@echo "... Drivers/GPIO/_HAL_GPIO.o"
 	@echo "... Drivers/GPIO/_HAL_GPIO.i"
 	@echo "... Drivers/GPIO/_HAL_GPIO.s"
+	@echo "... Drivers/Maze/Maze.o"
+	@echo "... Drivers/Maze/Maze.i"
+	@echo "... Drivers/Maze/Maze.s"
 	@echo "... Drivers/Motors/Motors.o"
 	@echo "... Drivers/Motors/Motors.i"
 	@echo "... Drivers/Motors/Motors.s"

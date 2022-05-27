@@ -1,3 +1,4 @@
+
 #ifndef _HAL_GPIO
 #define _HAL_GPIO
 

@@ -20,6 +20,8 @@ set(STM32_FILES
     Drivers/PWM/PWM.h
     Drivers/Sensors/Sensors.c
     Drivers/Sensors/Sensors.h
+    Drivers/Maze/Maze.c
+    Drivers/Maze/Maze.h
     main.c
 )
 
@@ -42,6 +44,7 @@ add_compile_options(-Og)
 add_compile_options(-Wall)
 add_compile_options(-fdata-sections)
 add_compile_options(-ffunction-sections)
+add_compile_options(-march=arm-v7e-m)
 
 target_link_options(${EXECUTABLE} PRIVATE
 -T${CMAKE_SOURCE_DIR}/BSP/STM32F413ZHTx_FLASH.ld
@@ -49,7 +52,8 @@ target_link_options(${EXECUTABLE} PRIVATE
 -mthumb
 -mfpu=fpv4-sp-d16
 -mfloat-abi=hard
--specs=nano.specs
+--specs=nano.specs
+--specs=nosys.specs
 -lc
 -lm
 -lnosys

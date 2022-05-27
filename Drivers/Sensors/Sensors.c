@@ -1,4 +1,48 @@
-#include "sensors.h"
+#ifndef SENSORS_SRC_PWM_C_
+#define SENSORS_SRC_PWM_C_
+
+#include "Sensors.h"
+
+GPIO_TYPE IR0_GPIO={
+	.port 			= PORTA,
+	.pin 				= 0,
+	.mode 			= INPUT_MODE,
+	.mode_type 	= INPUT_ANALOG,
+	.speed			= SPEED_50MHZ
+};
+
+GPIO_TYPE IR1_GPIO={
+	.port 			= PORTA,
+	.pin 				= 1,
+	.mode 			= INPUT_MODE,
+	.mode_type 	= INPUT_ANALOG,
+	.speed			= SPEED_50MHZ
+};
+
+GPIO_TYPE IR2_GPIO={
+	.port 			= PORTA,
+	.pin 				= 2,
+	.mode 			= INPUT_MODE,
+	.mode_type 	= INPUT_ANALOG,
+	.speed			= SPEED_50MHZ
+};
+
+GPIO_TYPE IR3_GPIO={
+	.port 			= PORTA,
+	.pin 				= 3,
+	.mode 			= INPUT_MODE,
+	.mode_type 	= INPUT_ANALOG,
+	.speed			= SPEED_50MHZ
+};
+
+GPIO_TYPE IR4_GPIO={
+	.port 			= PORTA,
+	.pin 				= 4,
+	.mode 			= INPUT_MODE,
+	.mode_type 	= INPUT_ANALOG,
+	.speed			= SPEED_50MHZ
+};
+
 
 void get_readings(int *sensors_readings)
 {
@@ -78,5 +122,5 @@ unsigned read_line(int *sensors_readings)
     return last_value / 2;
 }
 
-
+#endif
 

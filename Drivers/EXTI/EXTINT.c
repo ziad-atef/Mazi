@@ -1,3 +1,6 @@
+#ifndef EXTI_SRC_PWM_C_
+#define EXTI_SRC_PWM_C_
+
 /*
 ********************************************************************
 * // Authors: Donya Esawi  , Ahmed Ihab
@@ -254,3 +257,4 @@ void EXTI15_10_IRQHandler()
 	EXTI->PR |= EXTI_PR_PR15;
 	(EXTI_Handler[6])();
 }
+#endif

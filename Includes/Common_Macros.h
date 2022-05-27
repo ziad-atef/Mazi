@@ -14,10 +14,10 @@
 #define COMMON_MACROS
 
 /* Set a certain bit in any register */
-#define SET_BIT(REG,BIT) (REG|=(1<<BIT))
+//#define SET_BIT(REG,BIT) (REG|=(1<<BIT))
 
 /* Clear a certain bit in any register */
-#define CLEAR_BIT(REG,BIT) (REG&=(~(1<<BIT)))
+//#define CLEAR_BIT(REG,BIT) (REG&=(~(1<<BIT)))
 
 /* Toggle a certain bit in any register */
 #define TOGGLE_BIT(REG,BIT) (REG^=(1<<BIT))
