@@ -57,5 +57,7 @@ DebugConfig/
 *.ziada
 *.uvoptx
 *.uvprojx
-
+ubuntu-arm/
+build/
+CMakeFiles/
 .vscode
