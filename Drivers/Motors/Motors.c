@@ -1,7 +1,8 @@
 #ifndef MOTORS_SRC_PWM_C_
 #define MOTORS_SRC_PWM_C_
 
-#include "Motors.h"
+#include "../Motors/Motors.h"
+
 GPIO_TYPE IN1_GPIO = {
 	.port = PORTB,
 	.pin = 3,
@@ -86,7 +87,7 @@ void forward()
 void backward(){
 	// REVISIT
 	turn_left();
-	delay(200);
+	DelayMs(200);
 	forward();
 }
 

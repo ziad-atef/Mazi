@@ -24,7 +24,7 @@ boolean end_segment(int *sensor_readings)
     if (sensor_readings[0] <= BLACK_THRESH || sensor_readings[4] <= BLACK_THRESH)
         return TRUE;
     forward();
-    delay(100); // REVISIT
+    DelayMs(100); // REVISIT
     get_readings(sensor_readings);
     if (sensor_readings[0] > BLACK_THRESH && sensor_readings[1] > BLACK_THRESH &&
         sensor_readings[2] > BLACK_THRESH && sensor_readings[3] > BLACK_THRESH &&
@@ -32,7 +32,7 @@ boolean end_segment(int *sensor_readings)
         return TRUE;
     return FALSE;
 }
-// REVISIT THIS FUNCTION
+
 void check_intersection_lines(int *sensor_readings, boolean *left, boolean *straight, boolean *right)
 {
     if (sensor_readings[0] <= BLACK_THRESH && sensor_readings[4] > BLACK_THRESH)
@@ -46,7 +46,7 @@ void check_intersection_lines(int *sensor_readings, boolean *left, boolean *stra
 }
 boolean check_falsy_straight(int* sensor_readings){
     forward();
-    delay(100);
+    DelayMs(100);
     stop();
     get_readings(sensor_readings);
 

@@ -9,9 +9,8 @@
 #define _Motors_H_
 
 #include "../GPIO/_HAL_GPIO.h"
-#include "../GPIO/DELAY.h"
 #include "../PWM/PWM.h"
-
+#include "../../Includes/systick_time.h"
 #define GPIO_SPEED SPEED_50MHZ
 #define MAX_SPEED 120
 #define PWM_Prescalar 2
