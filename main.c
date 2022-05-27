@@ -4,6 +4,8 @@
 #include "Drivers/Sensors/Sensors.h"
 #include "Drivers/Maze/Maze.h"
 
+#include "Drivers/FlashMemory/FlashMemory.h"
+
 #define WHITE_THRESH 500
 #define WHITE_LINE(sensor_reading) sensor_reading > WHITE_THRESH
 
@@ -64,8 +66,8 @@ int main(void)
 
     simplify_path(path, &path_length);
   }
-  while (1)
-  {
-    // store path
-  }
+  // STORE PATH IN FLASH MEMORY
+  int numofwords = (strlen(path)/4)+((strlen(path)%4)!=0);
+  Flash_Write_Data(0x080FF800 , (uint32_t*)path, numofwords);
+  // Flash_Read_Data(0x080FF800 , Rx_Data, numofwords); // read in the next run(change mode)
 }
