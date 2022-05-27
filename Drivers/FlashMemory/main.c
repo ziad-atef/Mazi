@@ -8,7 +8,7 @@ int main(){
 
     uint32_t Rx_Data[30];
 
-    char string[100];
+    // char string[100];
 
     // int number = 123;
 
