@@ -17,5 +17,5 @@ void simplify_path(char *path, uint16* path_length);
 boolean end_segment(int *sensor_readings);
 
 void check_intersection_lines(int* sensor_readings, boolean* left, boolean* straight, boolean* right);
-
+boolean check_falsy_straight(int* sensor_readings);
 #endif

@@ -57,6 +57,11 @@ int main(void)
     // left = TRUE;
     // right = TRUE;
     // }
+    if(right == TRUE && straight == TRUE && left == FALSE)
+      if(check_falsy_straight(sensors_readings))
+      {
+        straight= FALSE;
+      }
     uint8 direction = select_turn(left, straight, right);
     // Move MOTORS
     turn(direction);
