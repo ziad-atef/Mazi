@@ -17,33 +17,33 @@ uint8 select_turn(boolean left, boolean straight, boolean right)
 void simplify_path(char *path, uint16 *path_length)
 {
 
-    if (*path_length < 3 || path[*path_length - 2] != 'B')
+    if (path_length < 3 || path[path_length - 2] != 'B')
         return;
     // SBL => R
-    if (path[*path_length - 1] == 'S' && path[*path_length - 1] == 'L')
-        path[*path_length - 1] = 'R';
+    if (path[path_length - 3] == 'S' && path[path_length - 1] == 'L')
+        path[path_length - 3] = 'R';
 
     // LBL => S
-    if (path[*path_length - 1] == 'L' && path[*path_length - 1] == 'L')
-        path[*path_length - 1] = 'S';
+    if (path[path_length - 3] == 'L' && path[path_length - 1] == 'L')
+        path[path_length - 3] = 'S';
 
     // SBS => B
-    if (path[*path_length - 1] == 'S' && path[*path_length - 1] == 'S')
-        path[*path_length - 1] = 'B';
+    if (path[path_length - 3] == 'S' && path[path_length - 1] == 'S')
+        path[path_length - 3] = 'B';
 
     // RBL => B
-    if (path[*path_length - 1] == 'R' && path[*path_length - 1] == 'L')
-        path[*path_length - 1] = 'B';
+    if (path[path_length - 3] == 'R' && path[path_length - 1] == 'L')
+        path[path_length - 3] = 'B';
 
     // LBR => B
-    if (path[*path_length - 1] == 'L' && path[*path_length - 1] == 'R')
-        path[*path_length - 1] = 'B';
+    if (path[path_length - 3] == 'L' && path[path_length - 1] == 'R')
+        path[path_length - 3] = 'B';
 
     // LBS => R
-    if (path[*path_length - 1] == 'L' && path[*path_length - 1] == 'S')
-        path[*path_length - 1] = 'R';
+    if (path[path_length - 3] == 'L' && path[path_length - 1] == 'S')
+        path[path_length - 3] = 'R';
 
-    path_length -= 2;
+    *path_length -= 2;
 }
 void turn(uint8 direction)
 {
