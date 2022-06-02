@@ -4,9 +4,9 @@
  *
  * File Name: ADC.h
  *
- * Description: Header file for STM32 Microcontroller - ADC Driver.
+ * Description: Header file for STM32 Microcontroller - 
+ * Analog to Digital Converter Driver.
  *
- * Author: 
  ******************************************************************************/
 
 #ifndef _ADC_H_

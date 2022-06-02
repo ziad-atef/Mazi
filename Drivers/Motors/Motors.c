@@ -5,39 +5,39 @@
 
 GPIO_TYPE IN1_GPIO = {
 	.port = PORTB,
-	.pin = 3,
+	.pin = IN1_Pin,
 	.mode = OUTPUT_MODE,
 	.mode_type = OUTPUT_GEN_PURPOSE,
 	.speed = SPEED_50MHZ};
 GPIO_TYPE IN2_GPIO = {
 	.port = PORTB,
-	.pin = 4,
+	.pin = IN2_Pin,
 	.mode = OUTPUT_MODE,
 	.mode_type = OUTPUT_GEN_PURPOSE,
 	.speed = SPEED_50MHZ};
 GPIO_TYPE IN3_GPIO = {
 	.port = PORTB,
-	.pin = 5,
+	.pin = IN3_Pin,
 	.mode = OUTPUT_MODE,
 	.mode_type = OUTPUT_GEN_PURPOSE,
 	.speed = SPEED_50MHZ};
 GPIO_TYPE IN4_GPIO = {
 	.port = PORTB,
-	.pin = 6,
+	.pin = IN4_Pin,
 	.mode = OUTPUT_MODE,
 	.mode_type = OUTPUT_GEN_PURPOSE,
 	.speed = SPEED_50MHZ};
 
 GPIO_TYPE MS1_GPIO = {
 	.port = PORTA,
-	.pin = 7,
+	.pin = MS1_Pin,
 	.mode = OUTPUT_MODE,
 	.mode_type = OUTPUT_ALT_FUNCTION,
 	.speed = SPEED_50MHZ};
 
 GPIO_TYPE MS2_GPIO = {
 	.port = PORTA,
-	.pin = 8,
+	.pin = MS2_Pin,
 	.mode = OUTPUT_MODE,
 	.mode_type = OUTPUT_ALT_FUNCTION,
 	.speed = SPEED_50MHZ};
@@ -84,7 +84,8 @@ void forward()
 	gpio_write(IN2_GPIO.port, IN2_GPIO.pin, 0);
 }
 
-void backward(){
+void backward()
+{
 	// REVISIT
 	turn_left();
 	DelayMs(200);
