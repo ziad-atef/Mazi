@@ -1,39 +1,66 @@
 #ifndef _EXTINT
 #define _EXTINT
 
-#include "../../Includes/stm32/stm32f10x.h"
-#include "../GPIO/_HAL_GPIO.h"
-#include "../../Includes/Std_Types.h"		/* 
-																									Includes the generic types to 
-																									be used
-																							 */
+#include "stm32f10x.h"
+#include "gp_drive.h"
 
 #define EXTI_LINES_NUM 7
 
-typedef enum
-{
+/**
+ * @brief 
+ * Interrupt Trigger Mode
+ * 
+ */
+
+typedef enum {
 	FALLING,
 	RISING,
 	ON_CHANGE
-} triggeringEdge;
+}triggeringEdge;
 
-typedef enum
-{
+/**
+ * @brief State of input pin
+ * 
+ */
+
+typedef enum{
 	PULL_UP,
 	PULL_DOWN
-} state;
+}state;
 
-typedef struct
-{
-	GPIO_TypeDef* PORT;
-	uint32_t PIN;
+/**
+ * @brief Struct contains the data of the pin with its handler
+ * 
+ */
+typedef struct{
+	unsigned short PORT;
+	unsigned short PIN;
 	triggeringEdge interrupt_edge;
 	state default_state;
 	void (*intHandler)(void);
-} _EXTINTType;
+}_EXTINTType;
+
+/**
+ * @brief Pointer to interrupt handler function 
+ * 
+ */
 
 static void (*EXTI_Handler[EXTI_LINES_NUM])(void);
 
-void _EXTINT_init(GPIO_TypeDef* PORT, uint32_t PIN, triggeringEdge interrupt_edge, state default_state, void (*intHandler)(void));
+/**
+ * @brief  Configure the pin as EXTI line
+ * 
+ * @param PORT Port of the pin
+ * @param PIN  Pin number 
+ * @param interrupt_edge Trigerring edge of the interrupt
+ * @param default_state Input pin state
+ * @param intHandler Interrupt handler function
+ *
+ */
+
+void _EXTINT_init(unsigned short PORT,unsigned short PIN, triggeringEdge interrupt_edge, state default_state, void (*intHandler)(void));
+
+
+
 
 #endif
