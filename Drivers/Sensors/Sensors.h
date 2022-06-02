@@ -47,8 +47,18 @@
 *   @param sensors_readings: an array of size 5 (number of sensors) to store
 *   each sensor value in its corresponding cell
 */
+
 void get_readings(int *sensors_readings);
 
+/*
+*   Function to read sensors value
+*   
+*   This function uses the sensors value at the first and end 
+*   IR sensors in the robot to calibrate their readings.
+*   
+*   @param sensors_readings: an array of size 5 (number of sensors) to store
+*   each sensor value in its corresponding cell
+*/
 void calibrate_readings(int *sensors_readings);
 
 
